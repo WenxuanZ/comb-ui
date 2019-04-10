@@ -38,13 +38,6 @@ if (typeof Promise === 'undefined') {
 // };
 CONFIG.URL = process.env.VUE_APP_URL;
 
-// 线上地址
-// CONFIG.URL = 'http://api-dongyin.hy-sport.cn/';
-
-// q1地址
-// CONFIG.URL = 'http://q1-s-doing.hy-sport.cn';
-// CONFIG.URL = 'http://qh.test.doing.hy-sport.cn';
-
 /*
  * 封装Axios
  * @param string url 请求的URL地址
