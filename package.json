@@ -11,7 +11,7 @@
     },
     "dependencies": {
         "axios": "^0.18.0",
-        "comb-ui": "git+https://github.com/diozhu/comb-ui.git#develop",
+        "comb-ui": "^2.0.2",
         "fastclick": "^1.0.6",
         "highlight.js": "^9.13.1",
         "jsonp": "^0.2.1",
@@ -20,7 +20,7 @@
         "underscore": "^1.9.1",
         "velocity-animate": "^1.5.2",
         "vue": "^2.5.17",
-        "vue-cli-plugin-comb": "https://github.com/diozhu/vue-cli-plugin-comb.git#develop",
+        "vue-cli-plugin-comb": "^2.0.2",
         "vue-lazyload": "^1.2.6",
         "vue-router": "^3.0.1",
         "vuex": "^3.0.1",
