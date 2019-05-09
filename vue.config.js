@@ -57,10 +57,8 @@ module.exports = {
         },
         proxy: {
             "/virtual/order": {
-                // target: 'http://localhost',
+                // target: 'http://localhost', // 线上环境
                 target: "http://localhost", // qa环境
-                // target: 'https://wxapi.dongyin.net',   // 线上环境（20181105）
-                // target: 'http://api-dongyin.hy-sport.cn',   // 线上环境
                 pathRewrite: { "^/virtual": "/" }, // 去掉前端虚路径
                 changeOrigin: true,
                 secure: false

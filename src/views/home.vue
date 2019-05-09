@@ -11,8 +11,8 @@
         </div>
         <div class="listview simple">
             <ul>
-                <li @click="go('http://github.com/diozhu/comb-ui/blob/develop/README.md')">readme<i class="icon icon-arrow-r"></i></li>
-                <li @click="go('http://github.com/diozhu/comb-ui/issues')">issues<i class="icon icon-arrow-r"></i></li>
+                <li @click="go('http://github.com/diozhu/comb/blob/develop/README.md')">readme<i class="icon icon-arrow-r"></i></li>
+                <li @click="go('http://github.com/diozhu/comb/issues')">issues<i class="icon icon-arrow-r"></i></li>
             </ul>
         </div>
         <div class="listview simple">
