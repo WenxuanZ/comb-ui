@@ -13,12 +13,20 @@ module.exports = {
     // parallel: undefined,
     // transpileDependencies: ['comb-ui'],
 
-    // css: {
-    //     // extract: true, // 将组件内的 CSS 提取到一个单独的 CSS 文件 (只用在生产环境中)
-    //     // sourceMap: false,
-    //     // loaderOptions: {},
-    //     // modules: false // 为所有的 CSS 及其预处理文件开启 CSS Modules
-    // },
+    css: {
+        // extract: true, // 将组件内的 CSS 提取到一个单独的 CSS 文件 (只用在生产环境中)
+        // sourceMap: false,
+        // modules: false, // 为所有的 CSS 及其预处理文件开启 CSS Modules
+        loaderOptions: {
+            css: { /** options here will be passed to css-loader */ },
+            postcss: {
+                /** options here will be passed to css-loader */
+                plugins: [
+                    require('postcss-px2rem')({ remUnit: 37.5 }) // add by Dio Zhu. on 2019.5.20
+                ]
+            }
+        }
+    },
 
     configureWebpack: config => { // 该对象将会被 webpack-merge 合并入最终的 webpack 配置
         // if (process.env.NODE_ENV === "production") { // 生产环境修改配置...
@@ -36,7 +44,7 @@ module.exports = {
     },
 
     pwa: {
-        name: "动因体育",
+        name: "91智能",
         themeColor: "#FFFFFF",
         msTileColor: "#FFFFFF"
     },
