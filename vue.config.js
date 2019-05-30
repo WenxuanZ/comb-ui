@@ -5,7 +5,7 @@ module.exports = {
     lintOnSave: 'error',
     // lintOnSave: process.env.NODE_ENV !== "production",
 
-    baseUrl: process.env.NODE_ENV === "production" ? "/" + process.env.VUE_APP_PROJECT_NAME : "/",
+    publicPath: process.env.NODE_ENV === "production" ? "/" + process.env.VUE_APP_PROJECT_NAME : "/",
     outputDir: process.env.NODE_ENV === 'production' ? path.resolve(__dirname, './dist/' + process.env.VUE_APP_PROJECT_NAME) : undefined,
     assetsDir: "static",
     runtimeCompiler: undefined,
