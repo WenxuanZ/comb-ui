@@ -1,6 +1,6 @@
 <template>
     <div class="page page-map-tms">
-        <v-map
+        <v-map-tms
             :zoom="zoom"
             drag-enable
             :markers="markers"
@@ -8,7 +8,7 @@
             :paths="paths"
             :speed="speed"
             :open-simplifier-window-func="openSimplifierWindowFunc"
-        ></v-map>
+        ></v-map-tms>
 
         <v-row :aligment="true">
             <v-col>
@@ -45,14 +45,14 @@
 <script>
     import { vMapTms, vRow, vCol, vButton } from 'comb-ui';
     import * as utils from '../js/utils/utils.js';
-    import bus from '../vendors/eventbus.js';
+    import bus from 'comb-ui/src/vendors/eventbus.js';
 
     window['positioning'] = function (p) { //eslint-disable-line
-        window.open(`/${process.env.VUE_APP_PROJECT_NAME}/map?pn=${encodeURIComponent(p)}&typ=1`);
+        window.open(`/${process.env.VUE_APP_PROJECT_NAME}/map-tms?pn=${encodeURIComponent(p)}&typ=1`);
     };
 
     window['playback'] = function (p) { //eslint-disable-line
-        window.open(`/${process.env.VUE_APP_PROJECT_NAME}/map?pn=${encodeURIComponent(p)}&typ=2`);
+        window.open(`/${process.env.VUE_APP_PROJECT_NAME}/map-tms?pn=${encodeURIComponent(p)}&typ=2`);
     };
 
     export default {
