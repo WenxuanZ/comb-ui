@@ -20,7 +20,7 @@
             </v-col>
         </v-row>
 
-        <v-row :aligment="true">
+        <v-row :aligment="true"  style="position:absolute;top:50px;left:50px;">
             <v-col>
                 <v-button type="info" size="small" @click="handlePrev"> << </v-button>
                 &nbsp;
@@ -99,7 +99,7 @@
                     arr.push([v.d1, v.d2, v.id]);
                 });
                 this.paths = arr;
-
+                console.log('initPlayback',this.paths);
                 // 根据车牌查询车辆详情，用于infoWindow的展示
                 let info = await this.getTscCapacityByPlateNumber(this.pn);
                 if (!info) return;
@@ -125,9 +125,8 @@
             },
 
             openSimplifierWindowFunc (idx) { // 动画进行时的窗口信息格式化
-                // console.log('map.openSimplifierWindowFunc: ', idx);
+                console.log('map.openSimplifierWindowFunc: ', idx);
                 let rtn = { infoTitle: '', infoBody: '', offset: [0, 0] }; // 需要返回的SimpleInfoWindow对象
-
                 let tit = [], con = [], cur = this.monitors[idx];
                 if (cur) {
                     tit.push(`<i class="icon icon-capacity-manage"></i>`);

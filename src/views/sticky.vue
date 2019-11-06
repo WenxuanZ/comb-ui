@@ -29,7 +29,8 @@
             未在正式环境使用，尚不知兼容性范围；
         </p>
         <div class="v-sticky" v-sticky.top="100">
-            <v-button size="full" styles="rectangle">距顶部100px</v-button>
+            <v-button size="full" st
+            yles="rectangle">距顶部100px</v-button>
         </div>
         <div class="num"><p v-for="n in 100" :key="n">模拟数据{{n}}</p></div>
         <div class="v-sticky" v-sticky.top>

@@ -47,11 +47,11 @@
             return {
                 flashTag: true, // 刷新标识
                 listData: []
-            };
+            }; 
         },
 
         computed: {
-            ...mapGetters(['userInfo', 'follows']) // 从store中获取当前登陆用户信息
+            ...mapGetters(['userInfo', 'follows']) // 从store中获取当前登陆用户信息     
         },
 
         mounted () {

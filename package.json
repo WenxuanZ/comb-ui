@@ -11,7 +11,7 @@
     },
     "dependencies": {
         "axios": "^0.18.0",
-        "comb-ui": "^2.0.10",
+        "comb-ui": "^2.0.21",
         "core-js": "^2.6.5",
         "fastclick": "^1.0.6",
         "highlight.js": "^9.13.1",

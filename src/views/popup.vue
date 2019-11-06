@@ -14,15 +14,15 @@
 
             <h2>示例</h2>
             <ul class="listview listview-form">
-                <!--<li>-->
-                    <!--<v-cell title="点击popup" value="注释浮动" is-link @click.native="popupVisible1 = true"></v-cell>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<v-cell title="点击popup" value="顶部浮动" is-link @click.native="popupVisible2 = true"></v-cell>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<v-cell title="点击popup" value="右侧弹出" is-link @click.native="popupVisible3 = true"></v-cell>-->
-                <!--</li>-->
+                <li>
+                    <v-cell title="点击popup" value="注释浮动" is-link @click.native="popupVisible1 = true"></v-cell>
+                </li>
+                <li>
+                    <v-cell title="点击popup" value="顶部浮动" is-link @click.native="popupVisible2 = true"></v-cell>
+                </li>
+                <li>
+                    <v-cell title="点击popup" value="右侧弹出" is-link @click.native="popupVisible3 = true"></v-cell>
+                </li>
                 <li>
                     <v-cell title="点击popup" value="底部弹出" is-link @click.native="popupVisible4 = true"></v-cell>
                 </li>
@@ -131,7 +131,7 @@ export default {
         },
 
         mounted () {
-//            this.buttonBottom = this.$refs.button.$el.getBoundingClientRect().bottom;
+         this.buttonBottom = this.$refs.button.$el.getBoundingClientRect().bottom;
         },
 
         methods: {
@@ -156,7 +156,7 @@ export default {
 <style rel="stylesheet/scss" lang="scss">
     @import "../scss/variables";
     @import "../scss/mixins";
-/*
+
 
     .date-btn{
         width:100%;
@@ -165,9 +165,9 @@ export default {
     }
     .page-popup-wrapper {
         padding: 0 20px;
-        !*position: absolute 50% * * *;*!
+        position: absolute 50% ;
         width: 100%;
-        !*transform: translateY(-50%);*!
+        transform: translateY(-50%);
         button:not(:last-child) {
             margin-bottom: 20px;
         }
@@ -224,9 +224,9 @@ export default {
 
     .v-popup-4 {
         width: 100%;
-        !*.picker-slot-wrapper, .picker-item {*!
-        !*backface-visibility: hidden;*!
-        !*}*!
+        .picker-slot-wrapper, .picker-item {
+        backface-visibility: hidden;
+        }
         position: absolute;
         bottom: 0;
         background: #FFFFFF;
@@ -251,7 +251,7 @@ export default {
         -webkit-transform: translate3d(-50%,0,0);
         transform: translate3d(-50%,0,0);
     }
-*/
+
     .page-popup {
         height: 100%;
         overflow: hidden;

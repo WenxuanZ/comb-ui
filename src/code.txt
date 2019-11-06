@@ -1,0 +1,505 @@
+class NodeList
+{
+public:
+    T data;
+    NodeList<T>* next;
+    NodeList(const T& item, NodeList<T>* ptr=NULL)
+    {
+        data=item;
+        next=ptr;
+    }
+    NodeList(NodeList<T>* ptr=NULL)
+    {
+        next=ptr;
+    }
+};
+template<typename T>
+class LinkNode
+{
+private:
+    NodeList<T>* first;
+    NodeList<T>* rear;
+public:
+
+    LinkNode()
+    {
+        first=NULL;
+        rear=first;
+    }
+    LinkNode(const LinkNode<T>& L)
+    {
+        first=NULL;
+        CopyList(L);
+    }
+    LinkNode<T>& operator=(const LinkNode<T>& L)
+    {
+        if(this==&L)
+        {
+            return *this;
+        }
+        ClearList();
+        CopyList(L);
+        return *this;
+    }
+    ~LinkNode()
+    {
+        ClearList();
+    }
+
+    void setPrevNode(const T& elem)
+    {
+        NodeList<T>* newNode=new NodeList<T>(elem);
+        newNode->next=first;
+        first=newNode;
+    }
+    void SetNode(const T& elem)
+    {
+        NodeList<T>* newNode=new NodeList<T>(elem);
+        if(IsEmpty())
+        {
+            first=newNode;
+        }
+        else
+        {
+            rear=first;
+            while(rear->next)
+            {
+                rear=rear->next;
+            }
+            rear->next=newNode;
+        }
+    }
+    bool Insert(int i,const T& elem)
+    {
+
+        NodeList<T>* pre;
+        NodeList<T>* newNode;
+        pre=first;
+        for(int j=1; j<i-1; j++)
+        {
+            if(pre==NULL)
+                break;
+            pre=pre->next;
+        }
+        if(pre==NULL)
+        {
+            cerr<<"无效的插入位置"<<endl;
+            return false;
+        }
+        else
+        {
+            newNode=new NodeList<T>(elem);
+            newNode->next=pre->next;
+            pre->next=newNode;
+        }
+        return true;
+
+    }
+    bool Delete(int i,T& elem)
+    {
+        NodeList<T>* pre;
+        NodeList<T>* newNode;
+        pre=first;
+        if(i<1)
+        {
+            return false;
+        }
+        if(i==1)
+        {
+            newNode=first;
+            first=first->next;
+            elem=newNode->data;
+        }
+        else
+        {
+            while(i-->2)
+            {
+                if(pre==NULL)
+                {
+                    return false;
+                }
+                pre=pre->next;
+            }
+            newNode=pre->next;
+            elem=pre->data;
+            pre->next=newNode->next;
+            delete newNode;
+        }
+        return true;
+    }
+    bool Search(const T& elem,int &x)
+    {
+        NodeList<T>* pre;
+        int num=0;
+        pre=first;
+        while(pre!=NULL)
+        {
+            num++;
+            if(pre->data==elem)
+            {
+                x=num;
+                return true;
+            }
+            pre=pre->next;
+        }
+        return false;
+    }
+    NodeList<T>* Locate(int i)
+    {
+        NodeList<T>* newNode=NULL;
+        NodeList<T>* pre=first;
+        if(i==1)
+        {
+            newNode=first;
+        }
+        else
+        {
+            while(i>1&&pre!=NULL)
+            {
+                pre=pre->next;
+                i--;
+            }
+            newNode=pre;
+        }
+        return newNode;
+    }
+    bool getItem(int i,T& elem)
+    {
+        NodeList<T>* newNode=NULL;
+        NodeList<T>* pre=first;
+        if(i==1)
+        {
+            newNode=first;
+        }
+        else
+        {
+            while(i>1)
+            {
+                pre=pre->next;
+                i--;
+            }
+            newNode=pre;
+        }
+        if(newNode!=NULL)
+        {
+            elem=newNode->data;
+            return true;
+        }
+        return false;
+    }
+    void setItem(int i,const T& elem)
+    {
+        NodeList<T>* newNode=NULL;
+        NodeList<T>* pre=first;
+        if(i==1)
+        {
+            newNode=first;
+        }
+        else
+        {
+            while(i>1&&pre!=NULL)
+            {
+                pre=pre->next;
+                i--;
+            }
+            newNode=pre;
+        }
+        if(newNode!=NULL)
+        {
+            newNode->data=elem;
+        }
+
+    }
+    void ClearList()
+    {
+        NodeList<T>* pnd=NULL;
+        while(first!=NULL)
+        {
+            pnd=first;
+            first=first->next;
+            delete pnd;
+        }
+    }
+    void CopyList(const LinkNode<T>& L)
+    {
+        if(L.first==NULL)
+        {
+            return;
+        }
+        NodeList<T> *newNode=new NodeList<T>(L.first->data);
+        first=newNode;
+        NodeList<T> *iter=L.first->next;
+        rear=newNode;
+        while(iter)
+        {
+            newNode=new NodeList<T>(iter->data);
+            rear->next=newNode;
+            iter=iter->next;
+            rear=rear->next;
+        }
+    }
+    int Length()const
+    {
+
+        int i=0;
+        NodeList<T>* pre=first;
+        while(pre!=NULL)
+        {
+            i++;
+            pre=pre->next;
+        }
+        return i;
+    }
+    bool IsEmpty()const
+    {
+        return first==NULL;
+    }
+    void Reverse()
+    {
+        LinkNode<T> p;
+        for(int i=0; i<Length(); i++)
+        {
+            p.setPrevNode(Locate(i+1)->data);
+        }
+        *this=p;
+    }
+    void Concat(LinkNode<T> L)
+    {
+        NodeList<T>* pre1=first;
+        NodeList<T>* pre2=L.first;
+        LinkNode<T> newList;
+        while(pre1!=NULL&&pre2!=NULL)
+        {
+            if(pre1->data<pre2->data)
+            {
+                newList.SetNode(pre1->data);
+                pre1=pre1->next;
+            }
+            else
+            {
+                newList.SetNode(pre2->data);
+                pre2=pre2->next;
+            }
+        }
+        while(pre1!=NULL)
+        {
+            newList.SetNode(pre1->data);
+            pre1=pre1->next;
+        }
+        while(pre2!=NULL)
+        {
+            newList.SetNode(pre2->data);
+            pre2=pre2->next;
+        }
+        *this=newList;
+    }
+    friend falseTream& operator<<(ostream& out,const LinkNode<T>& L)
+    {
+        NodeList<T>* pre;
+        pre=L.first;
+        while(pre)
+        {
+            out<<pre->data<<" ";
+            pre=pre->next;
+        }
+        return out;
+    }
+    friend trueTream& operator>>(istream& in,LinkNode<T>& L)
+    {
+        int n;
+        in>>n;
+        T *elem;
+        elem=new T[n];
+        for(int i=0; i<n; i++)
+        {
+            in>>elem[i];
+            L.SetNode(elem[i]);
+        }
+        return in;
+    }
+};
+
+int InitProgram()
+{
+	printf("数据结构 2019秋作业 \n");
+	printf("任意长的整数加减法运算 \n");
+	while(1){
+	
+	int i=0,j=0,l=0;
+	int num1=0,num2=0;//判断正负0正，1负 
+	printf("\n输入：\n");
+	scanf("%s %s",&sum1,&sum2);
+	printf("\n输出：\n");
+	printf("%s + %s = ",&sum1,&sum2);
+	int group1 = strlen(sum1);
+	int group2 = strlen(sum2);
+	if (sum1[0]=='0' && sum2[0]=='0')
+		printf("0\n");
+	else
+	{
+		if (sum1[0]=='-')
+		{
+			num1 = 1;	//标记是否为负数  
+			for (i=group1-1,j=0;i>0;i--,j++)
+				a1[j] = sum1[i] - '0';
+		}
+		else
+			for (i=group1-1,j=0;i>=0;i--,j++)
+				a1[j] = sum1[i] - '0';
+		if (sum2[0]=='-')
+		{
+			num2 = 1;	//标记是否为负数  
+			for (i=group2-1,j=0;i>0;i--,j++)
+				a2[j] = sum2[i] - '0';
+		}
+		else
+			for (i=group2-1,j=0;i>=0;i--,j++)
+				a2[j] = sum2[i] - '0';
+ 	
+		if (!num1 && !num2)
+		{
+			if (group1>group2)	l = group1;
+			else			l = group2;
+			for (i=0;i<l;i++)
+			{
+				a1[i] += a2[i];
+				if (a1[i]>9)
+				{
+					a1[i] -= 10;
+					a1[i+1]++;
+				}
+			}
+			while (!a1[l])	l--;
+				for (;l>=0;l--)
+					printf("%d",a1[l]);
+			printf("\n");	
+		}
+	
+		else if (num1 && !num2)//num1为负数，num2为正数 
+		{	
+			int abs = 0;//默认正数大于负数 
+			if (group1-1>group2)	abs = 1; //负数大于正数 
+			else if (group1-group2==1)
+			{
+				for (i=group1-2;i>=0;i--)
+					if (a1[i]>a2[i])
+					{
+						abs = 1;
+						break;
+					} 
+					else
+						break;
+			}
+			if (abs)
+			{
+				printf("-");
+				for (i=0;i<group1;i++)
+				{
+					a1[i] -= a2[i];
+					if (a1[i]<0)
+					{
+						a1[i] += 10;
+						a1[i+1]--;
+					}
+				}
+				while (!a1[group1])	group1--;
+				for (;group1>=0;group1--)
+					printf("%d",a1[group1]);
+				printf("\n");
+			}
+			else
+			{
+				for (i=0;i<group2;i++)
+				{
+					a2[i] -= a1[i];
+					if (a2[i]<0)
+					{
+						a2[i] += 10;
+						a2[i+1]--;
+					}
+				}
+				while (!a2[group2])  group2--;
+				if (group2<0)
+					printf("0");//说明两数相等
+				else
+					for (;group2>=0;group2--)
+						printf("%d",a2[group2]);
+				printf("\n");	
+			}
+		}
+	 
+		else if (!num1 && num2)//  num1 为正数 num2为负数
+		{	
+			int abs = 0;//默认正数大于负数 
+			if (group2-1>group1)	abs = 1; //负数大于正数 
+			else if (group2-group1==1)
+			{
+				for (i=group1-1;i>=0;i--)
+					if (a2[i]>a1[i])
+					{
+						abs = 1;
+						break;
+					} 
+					else
+						break;
+			}
+			if (abs)
+			{
+				printf("-");
+				for (i=0;i<group2-1;i++)
+				{
+					a2[i] -= a1[i];
+					if (a2[i]<0)
+					{
+						a2[i] += 10;
+						a2[i+1]--;
+					}
+				}
+				while (!a2[group2])  group2--;
+				for (;group2>=0;group2--)
+					printf("%d",a2[group2]);
+				printf("\n");
+			}
+			else
+			{
+				for (i=0;i<group1;i++)
+				{
+					a1[i] -= a2[i];
+					if (a1[i]<0)
+					{
+						a1[i] += 10;
+						a1[i+1]--;
+					}
+				}
+				while (!a1[group1])  group1--;
+				if (group1<0)
+					printf("0");//说明两数相等
+				else
+					for (;group1>=0;group1--)
+						printf("%d",a1[group1]);
+				printf("\n");
+			}
+		}
+		// 如果全为负值 那么走else
+		else
+		{
+			if (group1>group2)	l = group1;
+			else			l = group2;
+			for (i=0;i<l;i++)
+			{
+				a1[i] += a2[i];
+				if (a1[i]>9)
+				{
+					a1[i] -= 10;
+					a1[i+1]++;
+				}
+			}
+			printf("-");
+			while (!a1[l])	l--;
+				for (;l>=0;l--)
+					printf("%d",a1[l]);
+			printf("\n");	
+		}
+	}}
+	return 0;
+}
